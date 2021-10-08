@@ -1,0 +1,3 @@
+POSTGRES_USER=meteouser
+POSTGRES_DB=meteo
+POSTGRES_PASSWORD_FILE=/run/secrets/postgres-password

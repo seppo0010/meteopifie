@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  meteo:
+    build: meteo
+    env_file: ./postgres-config
+    depends_on:
+      - "database"
+    networks:
+      - meteo-database
+    secrets:
+      - postgres-password
+
+  database:
+    image: postgres
+    env_file: ./postgres-config
+    secrets:
+      - postgres-password
+    networks:
+      - meteo-database
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+secrets:
+  postgres-password:
+    file: ./postgres-password
+
+networks:
+  meteo-database:
+
+volumes:
+  pgdata:
