@@ -9,6 +9,7 @@ services:
       - meteo-database
     secrets:
       - postgres-password
+    restart: on-failure
 
   database:
     image: postgres
