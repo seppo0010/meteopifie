@@ -1,5 +1,5 @@
 #!/bin/bash
 set -Eeux
 
-cd /meteo
+cd /scrapy
 scrapy runspider -L WARNING meteo/spiders/smn.py

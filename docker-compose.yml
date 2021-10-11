@@ -1,12 +1,12 @@
 version: "3.9"
 services:
-  meteo:
-    build: meteo
+  scrapy:
+    build: scrapy
     env_file: ./postgres-config
     depends_on:
       - "database"
     networks:
-      - meteo-database
+      - scrapy-database
     secrets:
       - postgres-password
     restart: on-failure
@@ -17,7 +17,7 @@ services:
     secrets:
       - postgres-password
     networks:
-      - meteo-database
+      - scrapy-database
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -26,7 +26,7 @@ secrets:
     file: ./postgres-password
 
 networks:
-  meteo-database:
+  scrapy-database:
 
 volumes:
   pgdata:
