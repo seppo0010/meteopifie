@@ -18,7 +18,7 @@ RAINSCALE = [
     (['Algo nublado', 'Parcialmente nublado'], 'Parcialmente nublado'),
     (['Nublado'], 'Nublado'),
     (['Mayormente nublado', 'Cubierto', 'Neblina'], 'Mayormente nublado'),
-    (['Lluvias aisladas', 'Cubierto con llovizna en la hora anterior', 'Cubierto con llovizna'], 'Lluvias aisladas'),
+    (['Lluvias aisladas', 'Cubierto con llovizna en la hora anterior', 'Cubierto con llovizna', 'Lloviznas'], 'Lluvias aisladas'),
     (['Tormentas aisladas'], 'Tormentas aisladas'),
 ]
 
