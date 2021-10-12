@@ -11,4 +11,4 @@ RUN touch /var/log/cron.log
 
 COPY . /publish/
  
-CMD ["cron", "-f"]
+CMD /publish/run.sh

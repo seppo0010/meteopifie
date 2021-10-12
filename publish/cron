@@ -1,2 +1,4 @@
+SHELL=/bin/bash
+BASH_ENV=/container.env
 # 1 2,8,14,20 * * * /publish/run-once.sh > /proc/1/fd/1 2>/proc/1/fd/2
 * * * * * /publish/run-once.sh > /proc/1/fd/1 2>/proc/1/fd/2
