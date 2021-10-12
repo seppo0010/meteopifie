@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "cypress:run": "cypress run",
     "cypress:open": "cypress open"
   },
   "dependencies": {

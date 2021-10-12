@@ -11,7 +11,7 @@ steps = [
         """
         CREATE TABLE forecast_wg (
             read_at TIMESTAMP,
-            forecast_date DATETIME,
+            forecast_date TIMESTAMP,
             temperature FLOAT
         )
         """,

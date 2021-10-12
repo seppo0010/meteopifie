@@ -9,7 +9,7 @@ describe('scrap windguru', () => {
   it('should get first forecast', () => {
     cy.get('#tabid_0_0_dates').children('td').then((dates) => {
       cy.get('#tabid_0_0_TMP').children('td').then((temp) => {
-        cy.request('POST', 'http://localhost:8000/save', Object.fromEntries(zip(
+        cy.request('POST', 'http://windguru-server:8000/save', Object.fromEntries(zip(
           Array.prototype.slice.call(dates).map((date) => {
             const d = date.innerText
             const [_, dom, hour] = d.match(/.{2}\s*([0-9]{2})\.\s*([0-9]{2})h/)

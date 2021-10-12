@@ -11,6 +11,26 @@ services:
       - postgres-password
     restart: on-failure
 
+  windguru-server:
+    build: windguru/server
+    env_file: ./postgres-config
+    depends_on:
+      - "database"
+    networks:
+      - windguru-server-database
+      - windguru-client
+    secrets:
+      - postgres-password
+    restart: on-failure
+
+  windguru-scraper:
+    build: windguru/scraper
+    depends_on:
+      - "windguru-server"
+    networks:
+      - windguru-client
+    restart: on-failure
+
   database:
     image: postgres
     env_file: ./postgres-config
@@ -18,6 +38,7 @@ services:
       - postgres-password
     networks:
       - scrapy-database
+      - windguru-server-database
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -27,6 +48,8 @@ secrets:
 
 networks:
   scrapy-database:
+  windguru-server-database:
+  windguru-client:
 
 volumes:
   pgdata:

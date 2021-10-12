@@ -1,5 +1,11 @@
 import json
+import os
+import sys
+import urllib
+from datetime import datetime
 from http.server import BaseHTTPRequestHandler, HTTPServer
+
+import psycopg2
 
 def get_meteo_db():
     pg_user = os.getenv("POSTGRES_USER")
@@ -21,14 +27,16 @@ class MyServer(BaseHTTPRequestHandler):
         r = self.rfile.read(length)
         req = json.loads(r)
         for dt, value in req.items():
-            cur.execute(f'''INSERT INTO forecast_wg (read_at, forecast_date, temperature) VALUES (%s, %s)''', [
+            cur.execute(f'''INSERT INTO forecast_wg (read_at, forecast_date, temperature) VALUES (%s, %s, %s)''', [
                 now,
                 dt,
                 value,
             ])
+
         db.commit()
         self.send_response(200)
         self.end_headers()
+        sys.exit(0)
 
 if __name__ == "__main__":
     webServer = HTTPServer(('0.0.0.0', 8000), MyServer)
