@@ -10,6 +10,7 @@ import pytz
 import psycopg2
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 from telethon import TelegramClient
 
 TZ = 'America/Buenos_Aires'
@@ -112,6 +113,11 @@ def draw_chart(d, weather, predictions):
     }[d.hour])
     ax = plt.subplot(2,1,1)
     ax.plot(predictions['read_at'], predictions['temperature'], color='red', linestyle='dashed')
+    ax.legend([Line2D([0], [0], color='red', linestyle='dashed'), Line2D([0], [0])],
+          ['Estimado', 'Real'],
+          loc='upper center',
+          bbox_to_anchor=(0.5, 1.2))
+
     xlim = ax.get_xlim()
     ax.hlines(weather['temperature'].min(), xlim[0], xlim[1])
     ax.hlines(weather['temperature'].max(), xlim[0], xlim[1])
@@ -145,7 +151,7 @@ async def main(telegram_client):
     predictions = get_predictions(d, forecasts)
     predictions.loc[:, 'rain'] = predictions['description'].apply(get_rain)
     weather.loc[:, 'rain'] = weather['description'].apply(get_rain)
-    chart = draw_chart(d, predictions, weather)
+    chart = draw_chart(d, weather, predictions)
     await do_publish(telegram_client, chart)
 
 if __name__ == '__main__':
