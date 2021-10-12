@@ -1,2 +1,5 @@
 postgres-password
 *.pyc
+telegram-api-token
+telegram-bot-token
+telegram-config

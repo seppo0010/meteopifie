@@ -31,6 +31,21 @@ services:
       - windguru-client
     restart: on-failure
 
+  publish:
+    build: publish
+    depends_on:
+      - "database"
+    env_file:
+      - ./telegram-config
+      - ./postgres-config
+    secrets:
+      - postgres-password
+      - telegram-api-token
+      - telegram-bot-token
+    networks:
+      - publish-database
+    restart: on-failure
+
   database:
     image: postgres
     env_file: ./postgres-config
@@ -39,17 +54,23 @@ services:
     networks:
       - scrapy-database
       - windguru-server-database
+      - publish-database
     volumes:
       - pgdata:/var/lib/postgresql/data
 
 secrets:
   postgres-password:
     file: ./postgres-password
+  telegram-api-token:
+    file: ./telegram-api-token
+  telegram-bot-token:
+    file: ./telegram-bot-token
 
 networks:
   scrapy-database:
   windguru-server-database:
   windguru-client:
+  publish-database:
 
 volumes:
   pgdata:
