@@ -17,6 +17,7 @@ TZ = 'America/Buenos_Aires'
 RAINSCALE = [
     ([
      'Despejado',
+     'Despejado con neblina',
      ],
      'Despejado'
     ),
