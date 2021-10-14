@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from telethon import TelegramClient
 
+FORECAST_WINDOW = timedelta(hours=12)
 TZ = 'America/Buenos_Aires'
 RAINSCALE = [
     ([
@@ -70,7 +71,6 @@ RAINSCALE = [
 ]
 
 
-
 def get_module_logger(mod_name):
     logger = logging.getLogger(mod_name)
     handler = logging.StreamHandler()
@@ -121,26 +121,39 @@ def get_last_period():
 def get_weather(d, pg_connection):
     return pd.read_sql('''
     SELECT * FROM weather WHERE read_at BETWEEN %s AND %s ORDER BY read_at DESC
-    ''', pg_connection, params=[d - timedelta(hours=6), d])
+    ''', pg_connection, params=[d - FORECAST_WINDOW / 2, d])
 
 def get_forecasts(d, pg_connection):
-    forecasts = pd.read_sql('''
-    SELECT * FROM forecast_timeofday WHERE date = %s AND tod = %s ORDER BY read_at DESC
-    ''', pg_connection, params=[(d - timedelta(hours=6)).date(), {
+    tod = {
         2: 'night',
         8: 'early_morning',
         14: 'morning',
         20: 'afternoon',
-    }[d.hour]])
+    }[d.hour]
+    forecasts = pd.read_sql('''
+    SELECT * FROM forecast_timeofday WHERE date = %s AND tod = %s ORDER BY read_at DESC
+    ''', pg_connection, params=[(d - FORECAST_WINDOW / 2).date(), tod])
     forecasts.loc[:, 'read_at'] = pd.to_datetime(forecasts['read_at'])
+    fill_in = {
+        'early_morning': 'morning',
+        'night': 'afternoon',
+    }.get(tod, None)
+    if fill_in is not None:
+        forecasts = pd.concat((forecasts, pd.read_sql('''
+        SELECT * FROM forecast_timeofday WHERE date = %s AND tod = %s AND read_at < %s ORDER BY read_at DESC
+        ''', pg_connection, params=[
+            (d - FORECAST_WINDOW / 2).date(),
+            fill_in,
+            forecasts['read_at'].min() - FORECAST_WINDOW / 2,
+        ]))).reset_index(drop=True)
     return forecasts
 
 def get_predictions(d, forecasts):
     predictions = pd.DataFrame()
     for time in range(0, 14):
-        t = (d - timedelta(hours=12 * time))
+        t = (d - FORECAST_WINDOW * time)
         closest = forecasts.loc[(forecasts['read_at'] - t).apply(lambda x: abs(x)).idxmin()]
-        if abs(closest['read_at'] - t) < timedelta(hours=12):
+        if abs(closest['read_at'] - t) < FORECAST_WINDOW:
             predictions = predictions.append(closest)
     return predictions
 
