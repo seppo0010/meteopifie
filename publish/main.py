@@ -15,13 +15,59 @@ from telethon import TelegramClient
 
 TZ = 'America/Buenos_Aires'
 RAINSCALE = [
-    (['Despejado'], 'Despejado'),
-    (['Algo nublado', 'Parcialmente nublado'], 'Parcialmente nublado'),
-    (['Nublado'], 'Nublado'),
-    (['Mayormente nublado', 'Cubierto', 'Neblina'], 'Mayormente nublado'),
-    (['Lluvias aisladas', 'Cubierto con llovizna en la hora anterior', 'Cubierto con llovizna', 'Lloviznas'], 'Lluvias aisladas'),
-    (['Tormentas aisladas'], 'Tormentas aisladas'),
+    ([
+     'Despejado',
+     ],
+     'Despejado'
+    ),
+    ([
+     'Algo nublado',
+     'Parcialmente nublado',
+     'Ligeramente nublado',
+     ],
+     'Parcialmente nublado'
+    ),
+    ([
+     'Nublado',
+     ],
+     'Nublado'
+    ),
+    (
+     [
+     'Mayormente nublado',
+     'Cubierto',
+     'Neblina',
+     'Cubierto con neblina',
+     'Mayormente nublado con neblina',
+     'Niebla',
+     'Nublado con neblina',
+     ],
+     'Mayormente nublado'
+    ),
+    ([
+     'Lluvias aisladas',
+     'Cubierto con llovizna en la hora anterior',
+     'Cubierto con llovizna',
+     'Lloviznas',
+     'Chaparrones',
+     'Nublado con lluvia débil',
+    ],
+     'Lluvias aisladas'
+    ),
+    ([
+     'Lluvias',
+     'Nublado con lluvia en la hora anterior',
+     ],
+     'Lluvias'
+    ),
+    ([
+     'Tormentas aisladas',
+    ],
+     'Tormentas aisladas'
+    ),
 ]
+
+
 
 def get_module_logger(mod_name):
     logger = logging.getLogger(mod_name)
