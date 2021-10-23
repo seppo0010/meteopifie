@@ -53,6 +53,7 @@ RAINSCALE = [
      'Lloviznas',
      'Chaparrones',
      'Nublado con lluvia débil',
+     'Cubierto con lluvia débil',
     ],
      'Lluvias aisladas'
     ),
@@ -60,6 +61,8 @@ RAINSCALE = [
      'Lluvias',
      'Nublado con lluvia en la hora anterior',
      'Cubierto con lluvia en la hora anterior',
+     'Parcialmente nublado con lluvia en la hora anterior',
+     'Nublado con lluvia',
      ],
      'Lluvias'
     ),
