@@ -187,7 +187,7 @@ def draw_chart(d, weather, predictions):
     ax.hlines(weather['temperature'].max(), xlim[0], xlim[1])
     ax.set_xticks([predictions['read_at'].min(), predictions['read_at'].max()])
 
-    ax.set_ylim(0, 30)
+    ax.set_ylim(0, 50)
 
     ax = plt.subplot(2,1,2)
     ax.plot(predictions['read_at'], predictions['rain'], color='red', linestyle='dashed')
