@@ -69,8 +69,18 @@ RAINSCALE = [
     ),
     ([
      'Tormentas aisladas',
+     'Cubierto con tormenta débil',
+     'Cubierto con tormenta en la hora anterior',
+     'Nublado con tormenta débil',
+     'Lluvias fuertes',
     ],
      'Tormentas aisladas'
+    ),
+    ([
+     'Tormentas',
+     'Tormentas fuertes',
+    ],
+     'Tormentas'
     ),
 ]
 
