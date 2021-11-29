@@ -79,6 +79,7 @@ RAINSCALE = [
     ([
      'Tormentas',
      'Tormentas fuertes',
+     'Nublado con tormenta en la hora anterior',
     ],
      'Tormentas'
     ),
