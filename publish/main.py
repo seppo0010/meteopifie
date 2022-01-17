@@ -19,6 +19,7 @@ RAINSCALE = [
     ([
      'Despejado',
      'Despejado con neblina',
+     'Despejado con humo',
      ],
      'Despejado'
     ),
@@ -26,6 +27,8 @@ RAINSCALE = [
      'Algo nublado',
      'Parcialmente nublado',
      'Ligeramente nublado',
+     'Ligeramente nublado con humo',
+     'Nublado con tormenta sin precipitación',
      ],
      'Parcialmente nublado'
     ),
