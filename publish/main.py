@@ -29,6 +29,7 @@ RAINSCALE = [
      'Ligeramente nublado',
      'Ligeramente nublado con humo',
      'Nublado con tormenta sin precipitación',
+     'Algo nublado con neblina',
      ],
      'Parcialmente nublado'
     ),
