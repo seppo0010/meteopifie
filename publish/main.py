@@ -68,6 +68,7 @@ RAINSCALE = [
      'Cubierto con lluvia en la hora anterior',
      'Parcialmente nublado con lluvia en la hora anterior',
      'Nublado con lluvia',
+     'Cubierto con lluvia',
      ],
      'Lluvias'
     ),
