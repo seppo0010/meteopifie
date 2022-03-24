@@ -47,6 +47,7 @@ RAINSCALE = [
      'Mayormente nublado con neblina',
      'Niebla',
      'Nublado con neblina',
+     'Mayormente nublado con relámpagos sin truenos',
      ],
      'Mayormente nublado'
     ),
