@@ -57,16 +57,18 @@ class SmnSpider(scrapy.Spider):
                 forecast['temp_min'],
                 forecast['temp_max'],
                 forecast['humidity_min'],
-                forecast['humidity_max']
+                forecast['humidity_max'],
             ])
             for tod in ('early_morning', 'morning', 'afternoon', 'night'):
                 if forecast.get(tod, None) is not None:
-                    cur.execute(f'''INSERT INTO forecast_timeofday (read_at, date, tod, temperature, humidity, description) VALUES (%s, %s, %s, %s, %s ,%s)''', [
+                    cur.execute(f'''INSERT INTO forecast_timeofday (read_at, date, tod, temperature, humidity, description, rainprobmin, rainprobmax) VALUES (%s, %s, %s, %s, %s ,%s, %s, %s)''', [
                         now,
                         forecast['date'],
                         tod,
                         forecast[tod]['temperature'],
                         forecast[tod]['humidity'],
-                        forecast[tod]['weather']['description']
+                        forecast[tod]['weather']['description'],
+                        forecast[tod].get('rain_prob_range', [None, None])[0],
+                        forecast[tod].get('rain_prob_range', [None, None])[1],
                     ])
         db.commit()
