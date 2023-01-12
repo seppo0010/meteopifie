@@ -132,7 +132,7 @@ def get_telegram_client():
 
 def get_last_period():
     now = datetime.now()
-    h = ((now.hour - 2) // 6) * 6 + 2
+    h = ((now.hour) // 6) * 6
     if h < 0:
         d = datetime(now.year, now.month, now.day, h + 24, 0, 0) - timedelta(days=1)
     else:
@@ -147,10 +147,10 @@ def get_weather(d, pg_connection):
 
 def get_forecasts(d, pg_connection):
     tod = {
-        2: 'night',
-        8: 'early_morning',
-        14: 'morning',
-        20: 'afternoon',
+        0: 'night',
+        6: 'early_morning',
+        12: 'morning',
+        18: 'afternoon',
     }[d.hour]
     forecasts = pd.read_sql('''
     SELECT * FROM forecast_timeofday WHERE date = %s AND tod = %s ORDER BY read_at DESC
@@ -189,10 +189,10 @@ def get_rain(x):
 def draw_chart(d, weather, predictions):
     plt.figure(figsize=(12, 10))
     plt.suptitle('Pronosticos para el ' + d.strftime('%d/%m') + ' por ' + {
-        2: 'la noche',
-        8: 'la mañana temprana',
-        14: 'la mañana',
-        20: 'la tarde',
+        0: 'la noche',
+        6: 'la mañana temprana',
+        12: 'la mañana',
+        18: 'la tarde',
     }[d.hour])
     ax = plt.subplot(2,1,1)
     ax.plot(predictions['read_at'], predictions['temperature'], color='red', linestyle='dashed')
