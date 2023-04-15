@@ -62,6 +62,7 @@ RAINSCALE = [
      'Nublado con llovizna en la hora anterior',
      'Parcialmente nublado con lluvia débil',
      'Mayormente nublado con lluvia débi',
+     'Mayormente nublado con llovizna',
     ],
      'Lluvias aisladas'
     ),
