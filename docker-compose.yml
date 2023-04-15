@@ -53,7 +53,7 @@ services:
       - postgres-password
     networks:
       - scrapy-database
-      - windguru-server-database
+      # - windguru-server-database
       - publish-database
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -68,8 +68,8 @@ secrets:
 
 networks:
   scrapy-database:
-  windguru-server-database:
-  windguru-client:
+  # windguru-server-database:
+  # windguru-client:
   publish-database:
 
 volumes:
